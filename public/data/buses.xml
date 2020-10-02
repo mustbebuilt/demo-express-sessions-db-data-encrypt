@@ -1,0 +1,20 @@
+<buses>
+<bus>
+<number>51</number>
+<destination>Lodge Moor</destination>
+<start>Charnock</start>
+<interval>15</interval>
+</bus>
+<bus>
+<number>52</number>
+<destination>Crookes</destination>
+<start>Woodhouse</start>
+<interval>1</interval>
+</bus>
+<bus>
+<number>95</number>
+<destination>Walkley</destination>
+<start>City Centre</start>
+<interval>20</interval>
+</bus>
+</buses>
