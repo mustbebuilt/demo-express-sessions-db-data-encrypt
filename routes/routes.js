@@ -6,7 +6,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-module.exports = app => {
+module.exports = (app) => {
   router.get("/example", (req, res) => {
     if (!req.session.login) {
       res.redirect("/login");
@@ -15,7 +15,7 @@ module.exports = app => {
       return res.render("example", {
         title: "My EJS Example",
         firstname: "Hello EJS Template",
-        surname: "My Heading Two"
+        surname: "My Heading Two",
       });
     }
   });
@@ -32,13 +32,13 @@ module.exports = app => {
       .set("myDb")
       .collection("appUsers")
       .find({ name: username })
-      .toArray(function(err, docs) {
+      .toArray(function (err, docs) {
         if (err) {
           console.error(err);
         }
         if (docs.length > 0) {
           ///////
-          bcrypt.compare(req.body.password, docs[0].password, function(
+          bcrypt.compare(req.body.password, docs[0].password, function (
             err,
             result
           ) {
@@ -55,7 +55,7 @@ module.exports = app => {
   });
 
   router.get("/logout", (req, res) => {
-    req.session.destroy(function(err) {
+    req.session.destroy(function (err) {
       res.redirect("/login");
     });
   });
@@ -67,13 +67,13 @@ module.exports = app => {
   router.post("/signup", (req, res) => {
     // console.dir(req.body);
     let username = req.body.username;
-    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
       let hashedPwd = hash;
       let newUser = { name: username, password: hashedPwd };
       app
         .get("myDb")
         .collection("appUsers")
-        .insertOne(newUser, function(err, dbResp) {
+        .insertOne(newUser, function (err, dbResp) {
           if (err) {
             console.error(err);
           }

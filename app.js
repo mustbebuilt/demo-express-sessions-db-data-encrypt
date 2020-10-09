@@ -7,9 +7,10 @@ const app = express();
 // for post on form
 app.use(express.urlencoded({ extended: false }));
 
+// Cookie parser not needed with express-session 1.5.0+
 // switch cookie parser on
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
+// const cookieParser = require("cookie-parser");
+// app.use(cookieParser());
 
 // sessions
 const session = require("express-session");
@@ -51,7 +52,7 @@ MongoClient.connect(
   "mongodb://localhost:27017",
   { useNewUrlParser: true, useUnifiedTopology: true },
   function(err, client) {
-    app.set("myDb", client.db("myTest"));
+    app.set("myDb", client.db("myTestSession"));
   }
 );
 
